@@ -45,7 +45,7 @@ namespace JeromeCore.Models
 
         public string Decrypt(string cipherText)
         {
-            string EncryptionKey = "7f5s3f1s";
+            string EncryptionKey = "xxx";
             cipherText = cipherText.Replace(" ", "+");
             byte[] cipherBytes = Convert.FromBase64String(cipherText);
             using (Aes encryptor = Aes.Create())
