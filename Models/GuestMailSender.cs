@@ -25,7 +25,7 @@ namespace JeromeCore.Models
             var client = new SmtpClient();
             client.Connect("firstsuperfoods.com", 587, SecureSocketOptions.None);
             client.AuthenticationMechanisms.Remove("XOAUTH2");
-            client.Authenticate("jeromeklugh@firstsuperfoods.com", "goDman0o712!");
+            client.Authenticate("jeromeklugh@firstsuperfoods.com", "xxx");
 
            
 

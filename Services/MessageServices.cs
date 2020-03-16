@@ -30,7 +30,7 @@ namespace JeromeCore.Services
             {
                 //client.LocalDomain = "some.domain.com";
                 await client.ConnectAsync("firstsuperfoods.com", 587, SecureSocketOptions.None);
-                await client.AuthenticateAsync("jeromeklugh@firstsuperfoods.com", "goDman0o712!");
+                await client.AuthenticateAsync("jeromeklugh@firstsuperfoods.com", "xxx");
                 await client.SendAsync(emailMessage);
                 await client.DisconnectAsync(true);
                 //await client.ConnectAsync("lhchinesepaintings.com", 587, SecureSocketOptions.None);

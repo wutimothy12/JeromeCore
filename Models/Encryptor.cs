@@ -21,7 +21,7 @@ namespace JeromeCore.Models
 
         public string Encrypt(string clearText)
         {
-            string EncryptionKey = "7f5s3f1s";
+            string EncryptionKey = "xxx";
             byte[] clearBytes = Encoding.Unicode.GetBytes(clearText);
             using (Aes encryptor = Aes.Create())
             {
