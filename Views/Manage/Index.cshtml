@@ -1,0 +1,24 @@
+﻿@model IndexViewModel
+@{
+    ViewData["Title"] = "Manage your account";
+}
+@section Header {
+    <li><a href="/" title="Seattle Super Foods | Home">Home</a></li>
+    <li class="selected"><a href="/Product/products" title="Seattle Super Foods | Products">Products</a></li>
+    <li><a href="/Home/About" title="Seattle Super Foods | About">About</a></li>
+    <li><a href="/Home/Contact" title="Seattle Super Foods | Contact">Contact</a></li>
+    <li><a href="/Cart/index" title="Seattle Super Foods | Cart">Cart</a></li>
+}
+<div id="page">
+
+    <div id="main-content_noside">
+
+        <h2>@ViewData["Title"]</h2>
+        <h3>@ViewData["StatusMessage"]</h3>
+       
+                <p>Password: <a asp-controller="Manage" asp-action="ChangePassword">Change Password</a></p>
+                
+                <p>User Info: <a asp-controller="Manage" asp-action="UserInfo">User Info</a></p>
+
+    </div>
+    <div class="clear"></div>

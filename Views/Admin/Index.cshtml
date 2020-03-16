@@ -1,0 +1,25 @@
+﻿
+@{
+    ViewData["Title"] = "Admin";
+}
+@section Header {
+    <li><a href="/" title="Seattle Super Foods | Home">Home</a></li>
+    <li><a href="/Product/products" title="Seattle Super Foods | Products">Products</a></li>
+    <li><a href="/Home/About" title="Seattle Super Foods | About">About</a></li>
+    <li><a href="/Home/Contact" title="Seattle Super Foods | Contact">Contact</a></li>
+    <li><a href="/Cart/index" title="Seattle Super Foods | Cart">Cart</a></li>
+}
+<div id="page">
+
+    <div id="main-content_noside">
+
+        <h2>@ViewData["Title"].</h2>
+
+        <p>Decrytor: <a asp-controller="Admin" asp-action="Decrytor">Decrytor for Credit Card</a></p>
+        <p>All Orders List: <a asp-controller="Order" asp-action="ListAll">List all the Orders</a></p>
+        <p>Unship Orders List: <a asp-controller="Order" asp-action="List">List all the Unship Orders</a></p>
+        <p>Users List: <a asp-controller="Admin" asp-action="Users">List all the Users</a></p>
+        <p>Role Admin: <a asp-controller="RoleAdmin" asp-action="Index">List all the Roles</a></p>
+
+    </div>
+    <div class="clear"></div>

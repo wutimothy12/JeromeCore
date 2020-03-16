@@ -1,0 +1,28 @@
+﻿
+@{
+    ViewData["Title"] = "Decrytor";
+}
+
+@section Header {
+    <li><a href="/" title="Seattle Super Foods | Home">Home</a></li>
+    <li><a href="/Product/products" title="Seattle Super Foods | Products">Products</a></li>
+    <li><a href="/Home/About" title="Seattle Super Foods | About">About</a></li>
+    <li><a href="/Home/Contact" title="Seattle Super Foods | Contact">Contact</a></li>
+    <li><a href="/Cart/index" title="Seattle Super Foods | Cart">Cart</a></li>
+}
+<div id="page">
+
+    <div id="main-content_noside">
+        <h2>@ViewData["Title"]</h2>
+        <p><a asp-controller="Admin" asp-action="Index">Back to Admin</a></p>
+        <h3 style="margin-bottom:1em;">Card Number is: @ViewBag.review</h3>
+         <form asp-action="Decrytor" method="post">
+            <div>Card Number: @*@Html.TextBox("cardNumber")*@<input type="text" name="cardNumber" data-val="true" data-val-required="Please enter your card number" /></div>
+            <div class="field-validation-valid" data-valmsg-for="cardNumber" data-valmsg-replace="true"></div>
+            <p><input type="submit" value="Decrytor" /></p>
+        </form>
+        
+    </div>
+    @section Scripts {
+        @{ await Html.RenderPartialAsync("_ValidationScriptsPartial"); }
+    }

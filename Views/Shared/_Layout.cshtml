@@ -1,0 +1,92 @@
+﻿@using Microsoft.AspNetCore.Identity
+@inject SignInManager<ApplicationUser> SignInManager
+@inject UserManager<ApplicationUser> UserManager
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0">
+    <title>@ViewBag.Title</title>
+         <link rel="stylesheet" href="~/css/jquery.sidr.dark.css" />
+        <link rel="stylesheet" href="~/css/styles.css" />
+        <link rel="stylesheet" href="~/css/login.css" />
+        <link rel="stylesheet" asp-href-include="/lib/fontawesome/css/*.css" />
+</head>
+
+<body>
+    <div id="mobile-header">
+        <a id="responsive-menu-button" href="#sidr-main"><span></span>Menu</a>
+    </div>
+    
+    <div id="wrap">
+        <div id="CartSummary" class="group">
+           @await Html.PartialAsync("_LoginPartial")
+        </div> 
+        <div id="header">
+
+            <div id="logo">
+
+                <!--  begin sitename/logo -->
+
+                <h1><a href="/">First Super Foods</a></h1>
+                @if (SignInManager.IsSignedIn(User))
+                {
+                    <div style="margin-top:1em;margin-left:1em;">  Welcome @UserManager.GetUserName(User)!</div>
+                }
+
+                <!-- end sitename/logo -->
+
+            </div>
+
+            <div id="nav">
+                <ul>
+
+                    @RenderSection("Header")
+
+                </ul>
+
+            </div>
+            <div class="clear"></div>
+        </div>
+
+
+
+
+        @RenderBody()
+
+        <div id="main-sidebar">
+
+            <!-- being sidebar content -->
+            <div class="sidebar-box">
+
+            </div>
+            <!-- end sidebar content -->
+
+        </div>
+
+        <div class="clear"></div>
+
+    </div>
+
+    </div>
+
+    <div class="page-end">
+
+        <!-- begin page end -->
+
+        <p>Copyright &copy; <script>document.write(new Date().getFullYear())</script> First Super Foods. Powered by <a href="http://www.masterpiecestudioz.com" title="Certified Master Web Developer for small business and ecommerce.">Masterpiece Studioz</a>.</p>
+
+        <!-- end page end -->
+
+    </div>
+
+        <script src="~/lib/jquery/dist/jquery.js"></script>
+        <script src="~/js/jquery.sidr.js" asp-append-version="true"></script>
+        <script src="//cdn.jsdelivr.net/jquery.touchswipe/1.6.15/jquery.touchSwipe.min.js"></script>
+        <script src="~/js/fs.js" asp-append-version="true"></script>
+     
+    @RenderSection("scripts", required: false)
+    <div class="scroll-to-top"></div>
+</body>
+</html>

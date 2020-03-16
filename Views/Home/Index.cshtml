@@ -1,0 +1,124 @@
+﻿@using Microsoft.AspNetCore.Identity
+@inject SignInManager<ApplicationUser> SignInManager
+@inject UserManager<ApplicationUser> UserManager
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0">
+    <title>First Super Foods | Home</title>
+    <link rel="stylesheet" href="~/css/jquery.sidr.dark.css" />
+    <link rel="stylesheet" href="~/css/styles.css" />
+    <link rel="stylesheet" href="~/css/login.css" />
+    <link rel="stylesheet" asp-href-include="/lib/fontawesome/css/*.css" />
+    @*<meta name="google-site-verification" content="sR59lP0e_JBuxK3MA40AUtU7PqplxSFoUqlYP47ys-0" />*@
+</head>
+
+<body>
+    <div id="mobile-header">
+        <a id="responsive-menu-button" href="#sidr-main"><span></span>Menu</a>
+    </div>
+    
+    <div id="wrap">
+        <div id="CartSummary" class="group">
+            @await Html.PartialAsync("_LoginPartial")
+        </div>
+
+        <div id="header">
+
+            <div id="logo">
+
+                <!--  begin sitename/logo -->
+
+                <h1><a href="#">First Super Foods</a></h1>
+                @if (SignInManager.IsSignedIn(User))
+                {
+                    <div style="margin-top:1em;margin-left:1em;">  Welcome @UserManager.GetUserName(User)!</div>
+                }
+
+                <!-- end sitename/logo -->
+
+            </div>
+
+            <div id="nav">
+                <ul>
+
+                    <!-- begin top navigation -->
+
+                    <li class="selected"><a href="#" title="Seattle Super Foods | Home">Home</a></li>
+                    <li><a href="/Product/products" title="Seattle Super Foods | Products">Products</a></li>
+                    <li><a href="/Home/About" title="Seattle Super Foods | About">About</a></li>
+                    <li><a href="/Home/Contact" title="Seattle Super Foods | Contact">Contact</a></li>
+                    <li><a href="/Cart/index" title="Seattle Super Foods | Cart">Cart</a></li>
+
+                    <!-- end top navigation -->
+
+                </ul>
+
+            </div>
+            <div class="clear"></div>
+        </div>
+
+
+        <div id="page_home">
+
+            <div id="bag_image">
+                <img src="images/super_cereal.png" alt="" width="156" height="282" />
+            </div>
+
+            <div id="main-content_home">
+
+                <!-- begin main content -->
+                <h2>Welcome to the new website of <br />First Super Foods!</h2>
+                <p>First Super Foods' goal is to bring the best super foods to the public at the best price. Our new website will facilitate the acquisition of great super foods for those who want to buy online, and especially for those unable to buy our products in retail stores - Bringing the best of nature to benefit people as well as their pets.</p>
+
+                <p>
+                    First Super Foods has been serving the public since 1996. We are intent on becoming a leader in the super food field and are determined to continuously bring new products to aid the health of people and pets. Thank you for visiting!
+                    <!-- end main content -->
+                </p>
+            </div>
+
+            <div class="clear"></div>
+
+        </div>
+
+        <div id="bottom_wrap">
+            <div id="bottom_box_left">
+                <h2>Super Foods for a healthy lifestyle</h2>
+                <p>The mission of First Super Foods is to provide people and their pets with superior products. It all boils down to getting the highest quality natural ingredients. Everything from our whey, spriulina, bee pollen, genseng, and fiber are inspected with quality control and imported directly from the source. <a href="about.html" title="Seattle Super Foods | About">Read more</a></p>
+            </div>
+
+            <div id="bottom_box_center">
+                <h2>Black Bag Collection coming soon</h2>
+                <p>First Super Foods started with our most popular product, that everyone knows as 'Bee Sure.' With the success and demand that Bee Sure has given us, we are delighted to announce that First Super Foods will be releasing an entire line of Super Food products. <a href="products.html" title="Seattle Super Foods | Products">Read More</a></p>
+            </div>
+            <div id="bottom_box_right">
+                <h2>Why Super Foods?</h2>
+                <p>Super foods are the most efficient way for the body to obtain complete mutrition. Better than multivitamins, they will be assimulated and digested more effectively. The best super foods are condensed to 100% nutrition.</p>
+            </div>
+
+
+        </div>
+
+
+    </div>
+
+    <div class="page-end">
+
+        <!-- begin page end -->
+
+        <p>Copyright &copy; <script>document.write(new Date().getFullYear())</script> First Super Foods. Powered by <a href="http://www.masterpiecestudioz.com" title="Certified Master Web Developer for small business and ecommerce.">Masterpiece Studioz</a>.</p>
+        <!-- end page end -->
+
+    </div>
+    <script src="~/lib/jquery/dist/jquery.js"></script>
+    <script src="~/js/jquery.sidr.js" asp-append-version="true"></script>
+    <script src="//cdn.jsdelivr.net/jquery.touchswipe/1.6.15/jquery.touchSwipe.min.js"></script>
+    <script src="~/js/fs.js" asp-append-version="true"></script>
+    <div class="scroll-to-top"></div>
+</body>
+</html>

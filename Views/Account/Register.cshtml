@@ -1,0 +1,148 @@
+﻿@model RegisterViewModel
+@{
+    ViewData["Title"] = "Register";
+}
+@section Header {
+    <li><a href="/" title="Seattle Super Foods | Home">Home</a></li>
+    <li class="selected"><a href="/Product/products" title="Seattle Super Foods | Products">Products</a></li>
+    <li><a href="/Home/About" title="Seattle Super Foods | About">About</a></li>
+    <li><a href="/Home/Contact" title="Seattle Super Foods | Contact">Contact</a></li>
+    <li><a href="/Cart/index" title="Seattle Super Foods | Cart">Cart</a></li>
+}
+<div id="page">
+
+    <div id="main-content_noside">
+        <h2>@ViewData["Title"].</h2>
+
+        <form asp-controller="Account" asp-action="Register" asp-route-returnurl="@ViewData["ReturnUrl"]" method="post">
+            <h4>Create a new account.</h4>
+            <hr />
+            <div asp-validation-summary="All"></div>
+            <fieldset>
+                <legend><h3>Basic Info</h3></legend>
+                <p>
+                    <label asp-for="UserName"></label>
+
+                    <input asp-for="UserName" />
+                    <span asp-validation-for="UserName"></span>
+                </p>
+                <p>
+                    <label asp-for="Email"></label>
+
+                    <input asp-for="Email" />
+                    <span asp-validation-for="Email"></span>
+
+                </p>
+                <p>
+                    <label asp-for="PhoneNumber"></label>
+
+                    <input asp-for="PhoneNumber" />
+                    <span asp-validation-for="PhoneNumber"></span>
+                </p>
+                <p>
+                    <label asp-for="Password"></label>
+
+                    <input asp-for="Password" />
+                    <span asp-validation-for="Password"></span>
+
+                </p>
+                <p>
+                    <label asp-for="ConfirmPassword"></label>
+
+                    <input asp-for="ConfirmPassword" />
+                    <span asp-validation-for="ConfirmPassword"></span>
+
+                </p>
+            </fieldset>
+                <fieldset>
+                    <legend><h3>Billing Address</h3></legend>
+                    <p>
+                        <label asp-for="Line1"></label>
+
+                        <input asp-for="Line1" />
+                        <span asp-validation-for="Line1"></span>
+                    </p>
+                    <p>
+                        <label asp-for="Line2"></label>
+
+                        <input asp-for="Line2" />
+
+                    </p>
+                    <p>
+                        <label asp-for="City"></label>
+
+                        <input asp-for="City" />
+                        <span asp-validation-for="City"></span>
+                    </p>
+                    <p>
+                        <label asp-for="State"></label>
+
+                        <input asp-for="State" />
+                        <span asp-validation-for="State"></span>
+                    </p>
+                    <p>
+                        <label asp-for="Zip"></label>
+
+                        <input asp-for="Zip" />
+                        <span asp-validation-for="Zip"></span>
+                    </p>
+                    <p>
+                        <label asp-for="Country"></label>
+
+                        <input asp-for="Country" />
+                        <span asp-validation-for="Country"></span>
+                    </p>
+                </fieldset>
+                    <fieldset>
+                        <legend><h3>Credit Card</h3></legend>
+                        <p>
+                            <label asp-for="NameOnCard"></label>
+
+                            <input asp-for="NameOnCard" />
+                            <span asp-validation-for="NameOnCard"></span>
+                        </p>
+                        <p>
+                            <label asp-for="CreditCard"></label>
+
+                            <input asp-for="CreditCard" />
+                            <span asp-validation-for="CreditCard"></span>
+                        </p>
+                        <p>
+                            <label asp-for="CardConfirm"></label>
+
+                            <input asp-for="CardConfirm" />
+                            <span asp-validation-for="CardConfirm"></span>
+                        </p>
+                        <p>
+                            <label asp-for="Month"></label>
+                            <select asp-for="Month" asp-items="@new SelectList(Enum.GetNames(typeof(Month)))">
+                                <option disabled selected value="">-- select a Month --</option>
+                            </select>
+                            <span asp-validation-for="Month"></span>
+                        </p>
+                        <p>
+                            <label asp-for="Year"></label>
+                            <select asp-for="Year">
+                                <option disabled selected value="">-- select a Year --</option>
+                                @for (var i = 0; i < 9; i++)
+                                {
+
+                                    <option>@(DateTime.Now.AddYears(i).Year)</option>
+                                }
+                            </select>
+
+                            <span asp-validation-for="Year"></span>
+                        </p>
+                    </fieldset>
+                        <p>
+
+                            <button type="submit">Register</button>
+
+                        </p>
+</form>
+    </div>
+    <div class="clear"></div>
+
+        @section Scripts {
+            @{ await Html.RenderPartialAsync("_ValidationScriptsPartial"); }
+        }

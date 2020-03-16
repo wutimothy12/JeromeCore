@@ -1,0 +1,91 @@
+﻿@model JeromeCore.Models.Product
+
+@{
+    ViewBag.Title = "First Super Foods | Super Cereal";
+}
+
+@section Header {
+    <li><a href="/index.html" title="Seattle Super Foods | Home">Home</a></li>
+					<li class="selected"><a href="/Product/products" title="Seattle Super Foods | Products">Products</a></li>
+					<li><a href="/Home/About" title="Seattle Super Foods | About">About</a></li>
+					<li><a href="/Home/Contact" title="Seattle Super Foods | Contact">Contact</a></li>
+					<li><a href="/Cart/index">Cart</a></li>
+}
+<div id="page">
+
+<div id="main-content">
+    			<h2>Super Cereal - Super Foods in the morning</h2>
+            	
+              <div class="product_wrap">
+                	<div class="product_image">
+			  			<img src="/images/products/super_cereal.jpg" alt="" width="200" height="200" />
+            		</div>
+            
+       		    <div class="product_buy">
+       			  <p><em>@Model.Name</em> 
+            			<br /> 
+            			<em>@Model.Description</em>
+                        <br /> 
+            			<em>$@Model.Price</em>
+                       <p></p>
+                            <form id="@Model.ProductID" asp-action="AddToCart"
+                                  asp-controller="Cart" method="post">
+
+                                <input type="hidden" name="ProductID" value="@Model.ProductID" />
+
+                                <input type="hidden" name="returnUrl"
+                                       value="@ViewContext.HttpContext.Request.PathAndQuery()" />
+
+                                <input type="submit" value="Add to Cart" />
+
+                             </form>
+						
+           		  </div>
+                </div>
+                
+<p><strong>Super Cereal</strong> is America's #1 Granola Nut Mix. It is a delicious blend of granola, cashews, almonds, pumpkin seeds, curants, sunflower seeds and sesame sticks.</p>
+<p>Eat it right out of the bag as a nutritious trail mix, or serve with cold milk or soy milk for a  healthy breakfast for the accommodation 
+  <!-- end main content --> of a high-energy lifestyle. It tastes great.
+</p>
+<ul>
+	
+					<li>No Preservatives</li>
+					<li>No Artificial Flavors</li>
+					<li>No Artificial Colors</li>
+			  </ul>
+<p><strong>Super Cereal is it!</strong></p>
+            </div>
+			
+		  <div id="main-sidebar">
+			
+			  <!-- being sidebar content -->
+				<div class="sidebar-box">
+					<h4>Browse our Products</h4>
+					<ul>
+						<li>Super Cereal</li>
+                        <li><a href="/Product/beeSure" title="Bee Sure">Bee Sure</a></li>
+						<li><a href="#" title="Super Cereal">Black Bag Collection (Coming Soon)</a></li>
+					</ul>
+                    <ul id="policy">
+						<li><a href="/Home/policy" title="Return Policy">Return Policy</a></li>
+						<li><a href="/Home/privacy" title="Privacy Act Disclosure">Privacy Act Disclosure</a></li>
+					</ul>
+			  </div>
+			  <!-- end sidebar content -->
+				
+			</div>
+			
+			<div class="clear"></div>
+
+  @*  <div>
+         <p>Produt Name: @Model.Name</p>
+        <p>Description: @Model.Description</p>
+        <p>Price: @Model.Price</p>
+
+         @using (Html.BeginForm("AddToCart", "Cart")){
+             @Html.HiddenFor(x => x.ProductID)
+             @Html.Hidden("returnUrl", Request.Url.PathAndQuery)
+            <input type="submit" value="Add to Cart" />
+        }
+    </div>*@
+

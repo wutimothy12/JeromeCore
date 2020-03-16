@@ -1,0 +1,61 @@
+﻿@using Microsoft.AspNetCore.Identity
+@using JeromeCore.Models
+
+@inject SignInManager<ApplicationUser> SignInManager
+@inject UserManager<ApplicationUser> UserManager
+
+@if (SignInManager.IsSignedIn(User))
+{
+   
+    <div class="loginp group">
+        <form asp-area="" asp-controller="Account" asp-action="LogOff" method="post" id="logoutForm">
+
+
+            <ul>
+                <li>
+                    <div class="dropdown">
+                        <button class="dropbtn">My Account <i class="fa fa-caret-down"></i></button>
+                        <div class="dropdown-content">
+                            @if (User.IsInRole("Admins"))
+                            {<a asp-controller="Admin" asp-action="Index">Admin</a>
+                            <a asp-controller="RoleAdmin" asp-action="Index">RoleAmin</a>}
+                            <a asp-area="" asp-controller="Manage" asp-action="index">Manage Account</a>
+                            <a onclick="document.getElementById('logoutForm').submit();" style="cursor: pointer;">Log Off</a>
+
+                        </div>
+                    </div>
+                </li>
+
+
+                <li>
+                    @await Component.InvokeAsync("CartSummary")
+                </li>
+            </ul>
+
+
+        </form>
+    </div>
+}
+else
+{
+
+    <div class="loginp group">
+        <ul>
+            <li>
+                <div class="dropdown">
+                    <button class="dropbtn">Log In <i class="fa fa-caret-down"></i></button>
+                    <div class="dropdown-content">
+                        <a asp-area="" asp-controller="Account" asp-action="Register">Register</a>
+                        <a asp-area="" asp-controller="Account" asp-action="Login">Log in</a>
+                        
+                    </div>
+                </div></li>
+
+
+               <li> @await Component.InvokeAsync("CartSummary")
+            </li>
+        </ul>
+    </div>
+
+
+}

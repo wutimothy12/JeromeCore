@@ -1,0 +1,75 @@
+﻿@model Order
+
+@section Header {
+    <li><a href="/" title="Seattle Super Foods | Home">Home</a></li>
+    <li><a href="/Product/products" title="Seattle Super Foods | Products">Products</a></li>
+    <li><a href="/Home/About" title="Seattle Super Foods | About">About</a></li>
+    <li><a href="/Home/Contact" title="Seattle Super Foods | Contact">Contact</a></li>
+    <li><a href="/Cart/index" title="Seattle Super Foods | Cart">Cart</a></li>
+}
+
+<div id="page">
+
+    <div id="main-content_nosidet">
+        <h2>Order Details</h2>
+        @if (Model.Shipped)
+        {
+            <p><a asp-action="ListAll">Back to All Orders List</a></p>
+
+        }
+        else
+        {
+            <p><a asp-action="List">Back to Unship Orders List</a></p>
+
+        }
+        <div class="detailbox">
+            <h3>Order Information</h3>
+            <p>Order ID: @Model.OrderID<br />
+            Name: @Model.Name<br />
+            Email: @Model.Email<br />
+            Phone: @Model.Phone<br />
+            Order Date: @Model.AddedDate<br />
+            Shipping Status: @Model.Shipped.ToString()
+            </p>
+        </div>
+        <div class="detailbox">
+            <h3>Shipping Information</h3>
+            <p>@Model.ShippingLine1<br />
+            @Model.ShippingLine2<br />
+            @Model.ShippingCity<br />
+            @Model.ShippingState<br />
+            @Model.ShippingZip<br />
+            @Model.ShippingCountry
+            </p>
+        </div>
+        @if (Model.applicationuser != null)
+        {
+            <div class="detailbox">
+                <h3>Credit Card Information</h3>
+                <p>
+                    Name on Card: @Model.applicationuser.NameOnCard<br />
+                    Credit Card: @Model.applicationuser.CreditCard<br />
+                    Month: @Model.applicationuser.Month<br />
+                    Year: @Model.applicationuser.Year
+                </p>
+            </div>
+
+        }
+        <table width="90%" align="center">
+            <tr><th>Product</th><th>Quantity</th></tr>
+
+            @foreach (CartLine line in Model.Lines)
+            {
+
+                <tr>
+                    <td>@line.Product.Name</td>
+                    <td>@line.Quantity</td>
+                </tr>
+            }
+            <tr><td colspan="2" align="right">Shipping Flat Fee: $5</td></tr>
+
+            <tr><td colspan="2" align="right">Total: @Model.Total.ToString("c")</td></tr>
+            
+</table>
+
+</div>

@@ -1,0 +1,118 @@
+﻿@model UserListViewModel
+@section Header {
+    <li><a href="/" title="Seattle Super Foods | Home">Home</a></li>
+    <li><a href="/Product/products" title="Seattle Super Foods | Products">Products</a></li>
+    <li><a href="/Home/About" title="Seattle Super Foods | About">About</a></li>
+    <li><a href="/Home/Contact" title="Seattle Super Foods | Contact">Contact</a></li>
+    <li><a href="/Cart/index" title="Seattle Super Foods | Cart">Cart</a></li>
+}
+
+<div id="page">
+
+    <div id="main-content_nosidet">
+        <h2>Users Account</h2>
+        <p><a asp-controller="Admin" asp-action="Index">Back to Admin</a></p>
+
+
+        <div asp-validation-summary="ModelOnly"></div>
+
+
+
+        <table width="90%" align="center" class="tablelist">
+
+            <tr><th>Name</th><th>Phone</th><th>Email</th><th>Is Closed?</th><th></th><th></th></tr>
+
+            @if (Model.ApplicationUsers.Count() == 0)
+            {
+
+                <tr><td colspan="4" class="text-center">No User Accounts</td></tr>
+
+            }
+            else
+            {
+
+                foreach (ApplicationUser user in Model.ApplicationUsers)
+                {
+
+                    <tr>
+
+                        <td>@user.UserName</td>
+
+                        <td>@user.PhoneNumber</td>
+
+                        <td>@user.Email</td>
+
+                        <td>@user.IsClosed.ToString()</td>
+
+                        <td>
+
+                            <form asp-action="Delete" asp-route-id="@user.Id" method="post">
+
+                                <button type="submit" class="listbtu">
+
+                                    Delete
+
+                                </button>
+
+                            </form>
+
+                        </td>
+                        <td>
+
+                            <form asp-action="Delete" asp-route-id="@user.Id" method="post">
+
+                                <button type="submit" class="listbtu">
+
+                                    UnDelete
+
+                                </button>
+
+                            </form>
+
+                        </td>
+
+                    </tr>
+
+                }
+
+            }
+
+        </table>
+    </div>
+    <div id="Pager">@await Html.PartialAsync("Pager", Model)</div>
+    <style>
+            ul.pagination {
+                display: inline-block;
+                padding: 0;
+                margin: 0;
+            }
+
+                ul.pagination li {
+                    display: inline;
+                }
+
+                    ul.pagination li a {
+                        color: black;
+                        float: left;
+                        padding: 8px 16px;
+                        text-decoration: none;
+                    }
+
+                        ul.pagination li a.active {
+                            background-color: #4CAF50;
+                            color: white;
+                        }
+
+                        ul.pagination li a:hover:not(.active) {
+                            background-color: #ddd;
+                        }
+
+            #Pager {
+                margin: 1em;
+            }
+</style>
+    <div class="clear"></div>
+
+    @section Scripts {
+        @{ await Html.RenderPartialAsync("_ValidationScriptsPartial"); }
+    }

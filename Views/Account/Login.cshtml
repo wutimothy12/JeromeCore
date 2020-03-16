@@ -1,0 +1,70 @@
+﻿@using System.Collections.Generic
+@using Microsoft.AspNetCore.Http
+@using Microsoft.AspNetCore.Http.Authentication
+@model LoginViewModel
+@inject SignInManager<ApplicationUser> SignInManager
+
+@{
+    ViewData["Title"] = "Log in";
+}
+@section Header {
+    <li><a href="/" title="Seattle Super Foods | Home">Home</a></li>
+    <li><a href="/Product/products" title="Seattle Super Foods | Products">Products</a></li>
+    <li><a href="/Home/About" title="Seattle Super Foods | About">About</a></li>
+    <li><a href="/Home/Contact" title="Seattle Super Foods | Contact">Contact</a></li>
+    <li><a href="/Cart/index" title="Seattle Super Foods | Cart">Cart</a></li>
+}
+
+<div id="page">
+
+    <div id="main-content_noside">
+        <h2>@ViewData["Title"].</h2>
+
+        <section>
+            <form asp-controller="Account" asp-action="Login" asp-route-returnurl="@ViewData["ReturnUrl"]" method="post">
+                <h4>Use a local account to log in.</h4>
+                <hr />
+                <div asp-validation-summary="All"></div>
+                <p>
+                    <label asp-for="Email"></label>
+
+                    <input asp-for="Email" />
+                    <span asp-validation-for="Email"></span>
+
+
+                <p>
+                    <label asp-for="Password"></label>
+
+                    <input asp-for="Password" />
+                    <span asp-validation-for="Password"></span>
+
+                </p>
+
+                <p class="checkbox">
+
+                    <input asp-for="RememberMe" />
+
+                    <label asp-for="RememberMe"></label>
+                </p>
+
+
+
+                <p>
+                    <button type="submit">Log in</button>
+                </p>
+
+                <p>
+                    <a asp-action="Register" asp-route-returnurl="@ViewData["ReturnUrl"]">Register as a new user?</a>
+                </p>
+                <p>
+                    <a asp-action="ForgotPassword">Forgot your password?</a>
+                </p>
+            </form>
+        </section>
+
+    </div>
+    <div class="clear"></div>
+    @section Scripts {
+        @{ await Html.RenderPartialAsync("_ValidationScriptsPartial"); }
+    }
+

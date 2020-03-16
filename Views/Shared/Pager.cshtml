@@ -1,0 +1,37 @@
+﻿@model UserListViewModel
+@if (Model.PagingInfo.Pages.Any())
+{
+    <div>
+        Users @Model.PagingInfo.FirstRowOnPage to @Model.PagingInfo.LastRowOnPage of @Model.PagingInfo.TotalItems total
+    </div>
+    <nav>
+        <ul class="pagination">
+            @if (Model.PagingInfo.CurrentPage > 1)
+            {
+                <li>
+                    <a href="Users">First</a>
+                </li>
+                <li>
+                    <a href="Users?page=@(Model.PagingInfo.CurrentPage - 1)">Previous</a>
+                </li>
+            }
+
+            @foreach (var p in Model.PagingInfo.Pages)
+            {
+                <li>
+                    <a class="@(p == Model.PagingInfo.CurrentPage ? "active" : "")" href="Users?page=@p">@p</a>
+                </li>
+            }
+
+            @if (Model.PagingInfo.CurrentPage < Model.PagingInfo.TotalPages)
+            {
+                <li>
+                    <a href="Users?page=@(Model.PagingInfo.CurrentPage + 1)">Next</a>
+                </li>
+                <li>
+                    <a href="Users?page=@(Model.PagingInfo.TotalPages)">Last</a>
+                </li>
+            }
+        </ul>
+    </nav>
+}

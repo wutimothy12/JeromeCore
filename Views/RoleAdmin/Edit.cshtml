@@ -1,0 +1,108 @@
+﻿@model RoleEditModel
+
+@section Header {
+    <li><a href="/" title="Seattle Super Foods | Home">Home</a></li>
+    <li class="selected"><a href="/Product/products" title="Seattle Super Foods | Products">Products</a></li>
+    <li><a href="/Home/About" title="Seattle Super Foods | About">About</a></li>
+    <li><a href="/Home/Contact" title="Seattle Super Foods | Contact">Contact</a></li>
+    <li><a href="/Cart/index" title="Seattle Super Foods | Cart">Cart</a></li>
+}
+<div id="page">
+
+    <div id="main-content_noside">
+
+        <div><h4>Edit Role</h4></div>
+
+
+
+        <div asp-validation-summary="All"></div>
+
+
+
+        <form asp-action="Edit" method="post">
+
+            <input type="hidden" name="roleName" value="@Model.Role.Name" />
+
+            <input type="hidden" name="roleId" value="@Model.Role.Id" />
+
+
+
+            <h6>Add To @Model.Role.Name</h6>
+
+            <table width="90%" align="center">
+
+                @if (Model.NonMembers.Count() == 0)
+                {
+
+                    <tr><td colspan="2">All Users Are Members</td></tr>
+
+                }
+                else
+                {
+
+                    @foreach (ApplicationUser user in Model.NonMembers)
+                    {
+
+                        <tr>
+
+                            <td>@user.UserName</td>
+
+                            <td>
+
+                                <input type="checkbox" name="IdsToAdd" value="@user.Id">
+
+                            </td>
+
+                        </tr>
+
+                    }
+
+                }
+
+            </table>
+
+
+
+            <h6>Remove From @Model.Role.Name</h6>
+
+            <table width="90%" align="center">
+
+                @if (Model.Members.Count() == 0)
+                {
+
+                    <tr><td colspan="2">No Users Are Members</td></tr>
+
+                }
+                else
+                {
+
+                    @foreach (ApplicationUser user in Model.Members)
+                    {
+
+                        <tr>
+
+                            <td>@user.UserName</td>
+
+                            <td>
+
+                                <input type="checkbox" name="IdsToDelete" value="@user.Id">
+
+                            </td>
+
+                        </tr>
+
+                    }
+
+                }
+
+            </table>
+
+            <button type="submit">Save</button>
+
+            <a asp-action="Index">Cancel</a>
+
+        </form>
+    </div>
+    @section Scripts {
+        @{ await Html.RenderPartialAsync("_ValidationScriptsPartial"); }
+    }

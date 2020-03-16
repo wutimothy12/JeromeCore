@@ -1,0 +1,37 @@
+﻿@model ListAllViewModel
+@if (Model.PagingInfo.Pages.Any())
+{
+<div>
+    Orders @Model.PagingInfo.FirstRowOnPage to @Model.PagingInfo.LastRowOnPage of @Model.PagingInfo.TotalItems total
+    </div>
+    <nav>
+        <ul class="pagination">
+@if (Model.PagingInfo.CurrentPage > 1)
+                {
+            <li>
+                <a href="ListAll">First</a>
+                </li>
+            <li>
+                <a href="ListAll?page=@(Model.PagingInfo.CurrentPage - 1)">Previous</a>
+                </li>
+}
+
+@foreach (var p in Model.PagingInfo.Pages)
+                {
+<li>
+    <a class="@(p == Model.PagingInfo.CurrentPage ? " active" : "" )" href="ListAll?page=@p">@p</a>
+</li>
+}
+
+@if (Model.PagingInfo.CurrentPage < Model.PagingInfo.TotalPages)
+                {
+<li>
+    <a href="ListAll?page=@(Model.PagingInfo.CurrentPage + 1)">Next</a>
+</li>
+<li>
+    <a href="ListAll?page=@(Model.PagingInfo.TotalPages)">Last</a>
+</li>
+}
+</ul>
+</nav>
+}

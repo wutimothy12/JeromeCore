@@ -1,0 +1,201 @@
+﻿@model ShippingDetails
+
+@{
+    ViewBag.Title = "Guest Check Out";
+}
+
+@section Header {
+    <li><a href="/" title="Seattle Super Foods | Home">Home</a></li>
+    <li class="selected"><a href="/Product/products" title="Seattle Super Foods | Products">Products</a></li>
+    <li><a href="/Home/About" title="Seattle Super Foods | About">About</a></li>
+    <li><a href="/Home/Contact" title="Seattle Super Foods | Contact">Contact</a></li>
+    <li><a href="/Cart/index" title="Seattle Super Foods | Cart">Cart</a></li>
+}
+<div id="page">
+
+    <div id="main-content_noside">
+        <h2>Check Out</h2>
+        Please enter your details, and we'll ship your goods right away!
+
+        <form asp-controller="Order" asp-action="CheckOut" method="post">
+            @Html.ValidationSummary()
+
+            <fieldset>
+                <legend><h3>Ship to</h3></legend>
+                <p>
+
+                    <label>Name:</label><input asp-for="Name" />
+
+                </p>
+                <p>
+
+                    <label>Email:</label><input asp-for="Email" />
+
+                </p>
+                <p>
+
+                    <label>Phone:</label><input asp-for="Phone" />
+
+                </p>
+            </fieldset>
+
+            <fieldset>
+                <legend><h3>Shipping Address</h3></legend>
+                <p class="show_hide">
+                    <label> Same as Billing:</label><input type="checkbox" id="same_as_billing" />
+                </p>
+
+                <p>
+
+                    <label>Line 1:</label><input asp-for="ShippingLine1" />
+
+                </p>
+
+                <p>
+
+                    <label>Line 2:</label><input asp-for="ShippingLine2" />
+
+                </p>
+
+                <p>
+
+                    <label>City:</label><input asp-for="ShippingCity" />
+
+                </p>
+
+                <p>
+
+                    <label>State:</label><input asp-for="ShippingState" />
+
+                </p>
+
+                <p>
+
+                    <label>Zip:</label><input asp-for="ShippingZip" />
+
+                </p>
+
+                <p>
+
+                    <label>Country:</label><input asp-for="ShippingCountry" />
+
+                </p>
+            </fieldset>
+
+            <fieldset id="ccInfo">
+                <legend><h3>Credit Card Info</h3></legend>
+
+                <p>
+
+                    <label>Name On Card:</label><input asp-for="NameOnCard" />
+
+                </p>
+                <p>
+
+                    <label>Card:</label><input asp-for="CreditCard" />
+
+                </p>
+                <p>
+
+                    <label asp-for="CardConfirm">Confirm Card:</label><input asp-for="CardConfirm" /><span asp-validation-for="CardConfirm"></span>
+
+                </p>
+                <p>
+                    <label>Month:</label>
+                    <select asp-for="Month" asp-items="@new SelectList(Enum.GetNames(typeof(Month)))">
+                        <option disabled selected value="">-- select a Month --</option>
+                    </select>
+                </p>
+                <p>
+
+                    <label>Year:</label>
+                    <select asp-for="Year">
+                        <option disabled selected value="">-- select a Year --</option>
+                        @for (var i = 0; i < 9; i++)
+                        {
+
+                            <option>@(DateTime.Now.AddYears(i).Year)</option>
+                        }
+                    </select>
+
+
+                </p>
+
+                <p>
+
+                    <label>Line 1:</label><input asp-for="Line1" />
+
+                </p>
+
+                <p>
+
+                    <label>Line 2:</label><input asp-for="Line2" />
+
+                </p>
+
+                <p>
+
+                    <label>City:</label><input asp-for="City" />
+
+                </p>
+
+                <p>
+
+                    <label>State:</label><input asp-for="State" />
+
+                </p>
+
+                <p>
+
+                    <label>Zip:</label><input asp-for="Zip" />
+
+                </p>
+
+                <p>
+
+                    <label>Country:</label><input asp-for="Country" />
+
+                </p>
+            </fieldset>
+
+            <p align="center">
+                <input class="actionButtons" type="submit" value="Complete order" />
+            </p>
+
+        </form>
+    </div>
+    @section Scripts {
+        @{ await Html.RenderPartialAsync("_ValidationScriptsPartial"); }
+    <script>
+            $('#ShippingLine1').keyup(function () {
+
+
+                if ($(this).val().length == 0) {
+
+                    $('.show_hide').show();
+                } else {
+
+                    $('.show_hide').hide();
+                }
+            }).keyup();
+
+    $("#same_as_billing").on("change", function(){
+    if (this.checked) {
+        $("[name='ShippingLine1']").val($("[name='Line1']").val());
+        $("[name='ShippingLine2']").val($("[name='Line2']").val());
+        $("[name='ShippingCity']").val($("[name='City']").val());
+        $("[name='ShippingState']").val($("[name='State']").val());
+        $("[name='ShippingZip']").val($("[name='Zip']").val());
+    $("[name='ShippingCountry']").val($("[name='Country']").val());
+    } else {
+        $("[name='ShippingLine1']").val("");
+        $("[name='ShippingLine2']").val("");
+        $("[name='ShippingCity']").val("");
+        $("[name='ShippingState']").val("");
+        $("[name='ShippingZip']").val("");
+        $("[name='ShippingCountry']").val("");
+
+    }
+    });
+    </script>
+    }

@@ -1,0 +1,108 @@
+﻿@model JeromeCore.Models.Product
+
+@{
+    ViewBag.Title = "First Super Foods | Bee Sure";
+}
+
+@section Header {
+    <li><a href="/index.html" title="Seattle Super Foods | Home">Home</a></li>
+					<li class="selected"><a href="/Product/products" title="Seattle Super Foods | Products">Products</a></li>
+					<li><a href="/Home/About" title="Seattle Super Foods | About">About</a></li>
+					<li><a href="/Home/Contact" title="Seattle Super Foods | Contact">Contact</a></li>
+					<li><a href="/Cart/index">Cart</a></li>
+}
+<div id="page">
+
+<div id="main-content">
+			
+				<!-- begin main content -->
+			
+			<h2>Bee Sure - The superior super food drink</h2>
+            	
+              <div class="product_wrap">
+                	<div class="product_image">
+			  			<img src="/images/products/bee_sure.jpg" alt="" width="200" height="200" />
+            		</div>
+            
+       		    <div class="product_buy">
+                       <p>
+                           <em>@Model.Name</em><br />
+                           <em>@Model.Description</em><br/>
+                           <em>$@Model.Price</em>
+                          
+                       <p></p>
+                       <form id="@Model.ProductID" asp-action="AddToCart"
+                             asp-controller="Cart" method="post">
+
+                           <input type="hidden" name="ProductID" value="@Model.ProductID" />
+
+                           <input type="hidden" name="returnUrl"
+                                  value="@ViewContext.HttpContext.Request.PathAndQuery()" />
+
+                           <input type="submit" value="Add to Cart" />
+
+                       </form>
+           		  </div>
+                </div>
+                
+<p><strong>Bee Sure</strong> is America's #1 Super food drink mix. It's complete nutrition with over 200 nutrients! All Natural, pesticide free. 70% protein and it tastes great!</p>
+<p><strong>Bee Sure</strong> drink mix is the nutrient dense super food mixture specially designed in the United States for those individuals wanting the finest natural way to supplement their bodies' ever-changing nutritional needs.</p>
+<p>While demand for synthetic vitamins appears to be leveling off, we find the demand for mother nature's super foods with their whole food source nutrients is skyrocketing.</p>
+<p><strong>Bee Sure</strong> strengthens your vitality andstrength stamina with:</p>
+<ul>
+	
+		<li>Vitamins to build strong bodies</li>
+					<li>Minerals necessary to vitamin absorption</li>
+					<li>Enzymes needed for proper digestion</li>
+					<li>Amino Acids: &quot;The building blocks of life&quot;</li>
+					<li>Antioxidants to fight free radical damage in the body</li>
+					<li>Essential fatty acids: Omega 3 and Omega 6</li>
+					<li>A good source of Iron</li>
+					<li>An excellent source of natural Beta-Carotene</li>
+					<li>Contains known Cancer fighting nutrients</li>
+					<li>A natural immune system enhancer</li>
+					<li>Works to detoxify the body and brain</li>
+					<li>Supports repair of sickly or damaged tissues</li>
+					<li>Stimulates production of fat digesting enzymes</li>
+					<li>Quickly digested and easily absorbed</li>
+					<li>Promotes growth of friendly intestinal microflora</li>
+			  </ul>
+              <p>The answer is... <strong>Bee Sure Super Food Drink Mix! </strong>
+                <!-- end main content -->
+
+			</div>
+			
+		  <div id="main-sidebar">
+			
+			  <!-- being sidebar content -->
+				<div class="sidebar-box">
+					<h4>Browse our Products</h4>
+					<ul>
+						<li><a href="/Product/superCereal" title="Super Cereal">Super Cereal</a></li>
+                        <li>Bee Sure</li>
+						<li><a href="#" title="Super Cereal">Black Bag Collection (Coming Soon)</a></li>
+					</ul>
+                    <ul id="policy">
+						<li><a href="/Home/policy" title="Return Policy">Return Policy</a></li>
+						<li><a href="/Home/privacy" title="Privacy Act Disclosure">Privacy Act Disclosure</a></li>
+					</ul>
+			  </div>
+			  <!-- end sidebar content -->
+				
+			</div>
+			
+			<div class="clear"></div>
+			
+	
+ @*   <div>
+        <p>Produt Name: @Model.Name</p>
+        <p>Description: @Model.Description</p>
+        <p>Price: @Model.Price</p>
+
+         @using (Html.BeginForm("AddToCart", "Cart")){
+             @Html.HiddenFor(x => x.ProductID)
+             @Html.Hidden("returnUrl", Request.Url.PathAndQuery)
+            <input type="submit" value="Add to Cart" />
+        }
+    </div>*@
+

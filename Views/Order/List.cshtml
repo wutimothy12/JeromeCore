@@ -1,0 +1,102 @@
+@model IEnumerable<Order>
+
+@section Header {
+    <li><a href="/" title="Seattle Super Foods | Home">Home</a></li>
+    <li><a href="/Product/products" title="Seattle Super Foods | Products">Products</a></li>
+    <li><a href="/Home/About" title="Seattle Super Foods | About">About</a></li>
+    <li><a href="/Home/Contact" title="Seattle Super Foods | Contact">Contact</a></li>
+    <li class="selected"><a href="/Cart/index" title="Seattle Super Foods | Cart">Cart</a></li>
+}
+
+<div id="page">
+
+    <div id="main-content_nosidet">
+        <h2>Order List</h2>
+        <p><a asp-controller="Admin" asp-action="Index">Back to Admin</a></p>
+
+        @if (Model.Count() > 0)
+        {
+
+
+
+            <table width="90%" align="center" class="tablelist">
+
+                <tr><th>Order ID</th><th>Name</th><th>Order Date</th><th colspan="2">Details</th><th></th><th></th></tr>
+
+                @foreach (Order o in Model)
+                {
+
+                    <tr>
+                        <td>#@o.OrderID</td>
+                        <td>@o.Name</td>
+                        <td>@o.AddedDate</td>
+                        @*<td>@o.applicationuser?.Id</td>*@
+                        <th>Product</th>
+                        <th>Quantity</th>
+
+                        <td>
+
+                            <form asp-action="MarkShipped" method="post">
+
+                                <input type="hidden" name="orderId" value="@o.OrderID" />
+
+                                <button type="submit" class="listbtu">
+
+                                    Ship
+
+                                </button>
+
+                            </form>
+
+                        </td>
+                        <td>
+                            <form asp-action="OrderDetail" method="post">
+
+                                <input type="hidden" name="orderId" value="@o.OrderID" />
+
+                                <button type="submit" class="listbtu">
+
+                                    Detail
+
+                                </button>
+
+                            </form>
+
+                        </td>
+
+                    </tr>
+
+                    @foreach (CartLine line in o.Lines)
+                    {
+
+                        <tr>
+
+                            <td colspan="3"></td>
+
+                            <td>@line.Product.Name</td>
+                            <td>@line.Quantity</td>
+
+                            <td colspan="2"></td>
+
+                        </tr>
+
+
+
+                    }
+
+                }
+
+            </table>
+
+        }
+        else
+        {
+
+            <div class="text-center">No Unshipped Orders</div>
+
+        }
+
+        @section Scripts {
+            @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+        }
+       </div>

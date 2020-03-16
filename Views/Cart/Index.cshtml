@@ -1,0 +1,74 @@
+﻿@model JeromeCore.Models.CartIndexViewModel
+
+@{
+    ViewBag.Title = "Your cart";
+}
+
+@section Header {
+    <li><a href="/" title="Seattle Super Foods | Home">Home</a></li>
+    <li><a href="/Product/products" title="Seattle Super Foods | Products">Products</a></li>
+    <li><a href="/Home/About" title="Seattle Super Foods | About">About</a></li>
+    <li><a href="/Home/Contact" title="Seattle Super Foods | Contact">Contact</a></li>
+    <li class="selected"><a href="/Cart/index" title="Seattle Super Foods | Cart">Cart</a></li>
+}
+
+<div id="page">
+
+    <div id="main-content_nosidet">
+        <h2>Your cart</h2>
+        <table width="90%" align="center">
+            <thead>
+                <tr>
+                    <th align="center">Quantity</th>
+                    <th align="left">Item</th>
+                    <th align="right">Price</th>
+                    <th align="right">Subtotal</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var line in Model.Cart.Lines)
+                {
+                    <tr>
+                        <td align="center">@line.Quantity</td>
+                        <td align="left">@line.Product.Name</td>
+                        <td align="right">@line.Product.Price.ToString("c")</td>
+                        <td align="right">
+                            @((line.Quantity
+                * line.Product.Price).ToString("c"))
+                    </td>
+                    <td>
+                        @using (Html.BeginForm("RemoveFromCart", "Cart"))
+                        {
+                            @Html.Hidden("ProductId", line.Product.ProductID)
+                            @Html.HiddenFor(x => x.ReturnUrl)
+                            <input class="actionButtons" type="submit"
+                                   value="Remove" />
+                        }
+                    </td>
+                </tr>
+                }
+            </tbody>
+            <tfoot>
+                <tr class="flatfee">
+                    <td colspan="3" align="right">Shipping Flat Fee:</td>
+                    <td align="right">
+                        $5.00
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="3" align="right">Total:</td>
+                    <td align="right">
+                        @Model.Cart.ComputeTotalValue().ToString("c")
+                    </td>
+                </tr>
+            </tfoot>
+        </table>
+        <p align="center" class="actionButtons">
+            <a href="@Model.ReturnUrl">Continue shopping</a>
+            @*@Html.ActionLink("Checkout now", "Checkout")*@
+            <a asp-controller="Order" asp-action="CheckOutChoice">Checkout</a>
+
+        </p>
+
+    </div>
+

@@ -1,0 +1,78 @@
+﻿@model ApplicationUser
+
+@section Header {
+    <li><a href="/" title="Seattle Super Foods | Home">Home</a></li>
+    <li><a href="/Product/products" title="Seattle Super Foods | Products">Products</a></li>
+    <li><a href="/Home/About" title="Seattle Super Foods | About">About</a></li>
+    <li><a href="/Home/Contact" title="Seattle Super Foods | Contact">Contact</a></li>
+    <li><a href="/Cart/index" title="Seattle Super Foods | Cart">Cart</a></li>
+}
+
+<div id="page">
+
+    <div id="main-content_nosidet">
+        <h2> User Info</h2>
+        <h3>@ViewBag.Msg</h3>
+        <div class="detailbox">
+            <h3>Member Information</h3>
+            <p>
+                User Name: @Model.UserName<br />
+                Email: @Model.Email<br />
+                Phone: @Model.PhoneNumber<br />
+                Last Login Date: @Model.LastLoginDate<br />
+                Joint Date: @Model.AddedDate</p>
+        </div>
+        <div class="detailbox">
+            <h3>Billing Address</h3>
+            <p>
+                Line1: @Model.Line1<br />
+                Line2: @Model.Line2<br />
+                City: @Model.City<br />
+                State: @Model.State<br />
+                Zip Date: @Model.Zip<br />
+                Country: @Model.Country</p>
+        </div>
+        <div class="detailbox">
+            <h3>Credit Card</h3>
+            <p>
+                Name on Card: @Model.NameOnCard<br />
+                Credit Card: @Model.CreditCard<br />
+                Month: @Model.Month<br />
+                Year: @Model.Year</p>
+        </div>
+        <div class="detailbox">
+            <h3>Shipping Information</h3>
+            <p>Orders History: @Model.Orders?.Count</p>
+            <p> Order Number:</p>
+
+            @if (Model.Orders?.Count != 0)
+            {
+                <ul style="list-style:none;display:flex;width:90%;flex-direction:row">
+                   
+                    @foreach (var o in Model.Orders)
+                    {
+                   <li style="margin:0 .5em 0 0;">
+                        @*Order Number:*@<form asp-controller="Order" asp-action="UserOrderDetail" method="post">
+
+                            <input type="hidden" name="orderId" value="@o.OrderID" />
+
+                            <button type="submit" class="userbtu">
+
+                                #@o.OrderID
+
+                            </button>
+
+                        </form>
+                    </li>
+                    }
+                </ul>
+                //}
+            }
+            else
+            {<h3>@ViewBag.Msg2</h3> }
+        </div>
+        <p>
+            <a asp-controller="Manage" asp-action="UpdateUser" asp-route-id="@Model.Id">Update User</a>
+        </p>
+
+    </div>
