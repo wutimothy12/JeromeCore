@@ -33,10 +33,7 @@ namespace JeromeCore.Services
                 await client.AuthenticateAsync("jeromeklugh@firstsuperfoods.com", "xxx");
                 await client.SendAsync(emailMessage);
                 await client.DisconnectAsync(true);
-                //await client.ConnectAsync("lhchinesepaintings.com", 587, SecureSocketOptions.None);
-                //await client.AuthenticateAsync("timothy.wu@lhchinesepaintings.com", "goDman0o712!");
-                //await client.SendAsync(emailMessage);
-                //await client.DisconnectAsync(true);
+               
             }
         }
        
